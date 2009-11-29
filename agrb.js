@@ -61,10 +61,8 @@
         if(this.__form){ return true; }
         var form_data = [];
         for(var i in this.formdata){
-            if (this.formdata.hasOwn(this.formdata[i])){
-                if(this.formdata[i]) {
-                    f.push('<input type="hidden" name="' + this.cleanString(i) + '" value="' + this.cleanString(this.formdata[i]) + '">');
-                }
+            if(this.formdata[i]) {
+                f.push('<input type="hidden" name="' + this.cleanString(i) + '" value="' + this.cleanString(this.formdata[i]) + '">');
             }
         }
 
