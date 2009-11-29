@@ -1,6 +1,11 @@
 (function(){
     
+    console.log(document);
+    window.console.log(document);
     var console = window.console, document = window.document;
+    
+    console.log("its running");
+    window.console.log("The only way to do console.log is through window");
     
     var agrb = function(){
         var b = document.location.pathname.split("/");
