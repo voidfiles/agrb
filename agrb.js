@@ -1,4 +1,24 @@
 (function(){
+    function A(a, b) {
+        var c = 0;
+        a = x(String(a)).split(".");
+        b = x(String(b)).split(".");
+        for (var d = Math.max(a.length, b.length), e = 0; c == 0 && e < d; e++) {
+            var f = a[e] || "",
+            m = b[e] || "",
+            g = new RegExp("(\d*)(\D*)", "g"),
+            s = new RegExp("(\d*)(\D*)", "g");
+            do {
+                var l = g.exec(f) || ["", "", ""],
+                o = s.exec(m) || ["", "", ""];
+                if (l[0].length == 0 && o[0].length == 0) break;
+                c = B(l[1].length == 0 ? 0: parseInt(l[1], 10), o[1].length == 0 ? 0: parseInt(o[1], 10)) || B(l[2].length == 0, o[2].length == 0) || B(l[2], o[2]);
+            }
+            while (c == 0)
+        }
+        return c;
+    };
+    
     var agrb = function(){
         var b = document.location.pathname.split("/");
         this.formdata = {};
@@ -80,17 +100,17 @@
     agrb.prototype.createIframe = function(){
         //var a = document.getElementById("GR________link_bookmarklet_node");
         console.log("iframe",this.__iframe);
-        if (!this.__iframe_div) {
+        if (typeof(this.__iframe) === "undefined") {
             a = document.createElement("div");
             a.id = "GR________link_bookmarklet_node";
-            a.style.position = H && A(K, "6") == 0 ? "absolute": "fixed";
+            a.style.position = "fixed";
             a.style.background = "#fff";
             a.style.border = "4px solid red";
             a.style.top = "8px";
             a.style.right = "8px";
             a.style.width = "520px";
             a.style.height = "378px";
-            a.style.zIndex = 1E5;
+            a.style.zIndex = 9999;
             this.__iframe_div = a;
             document.body.appendChild(this.__iframe_div);
             this.__iframe_div.innerHTML = '<iframe frameborder="0" id="GR________link_bookmarklet_frame" name="GR________link_bookmarklet_frame" style="width:100%;height:100%;border:0px;padding:0px;margin:0px"></iframe>';
