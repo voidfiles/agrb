@@ -117,9 +117,10 @@
     
     var in_action = new agrb();
     
-    window.in_action = in_action;
+    
     
     in_action.submit();
+    window.in_action = in_action;
     
     
 })();
