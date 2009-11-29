@@ -79,7 +79,8 @@
     };
     agrb.prototype.createIframe = function(){
         //var a = document.getElementById("GR________link_bookmarklet_node");
-        if (!this.__iframe) {
+        console.log("iframe",this.__iframe);
+        if (!this.__iframe_div) {
             a = document.createElement("div");
             a.id = "GR________link_bookmarklet_node";
             a.style.position = H && A(K, "6") == 0 ? "absolute": "fixed";
@@ -90,8 +91,10 @@
             a.style.width = "520px";
             a.style.height = "378px";
             a.style.zIndex = 1E5;
-            this.__iframe = a;
-            document.body.appendChild(this.__iframe);
+            this.__iframe_div = a;
+            document.body.appendChild(this.__iframe_div);
+            this.__iframe_div.innerHTML = '<iframe frameborder="0" id="GR________link_bookmarklet_frame" name="GR________link_bookmarklet_frame" style="width:100%;height:100%;border:0px;padding:0px;margin:0px"></iframe>';
+            this.__iframe = document.getElementById("GR________link_bookmarklet_frame");
         };
     };
     agrb.prototype.submitForm = function(){
