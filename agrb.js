@@ -1,9 +1,8 @@
 (function(){
-    window.console.log(document);
-    var console = window.console, document = window.document;
     
+    var console = window.console, document = window.document;
+    console.log(document);
     console.log("its running");
-    window.console.log("The only way to do console.log is through window");
     
     var agrb = function(){
         var b = document.location.pathname.split("/");
@@ -20,6 +19,7 @@
         }
     };
     agrb.prototype.grLink = "http://www.google.com/reader/link-frame";
+    agrb.prototype.grIFrame = "GR________link_bookmarklet_frame";
     agrb.prototype.getHtml = function(){
         if (document.selection && document.selection.createRange) {
             this.formdata.snippet = document.selection.createRange().text ? document.selection.createRange().htmlText: "";
@@ -75,7 +75,7 @@
         
         this.__form = document.createElement("form");
         this.__form.method = "POST";
-        this.__form.target = this.__iframe.id;
+        this.__form.target = this.grIFrame;
         this.__form.action = this.grLink;
         this.__form.acceptCharset = "utf-8";
 
@@ -110,6 +110,7 @@
     
     
     agrb.prototype.submit = function(){
+        
         this.createForm();
         this.createIframe();
         //this.submitForm();
