@@ -1,6 +1,4 @@
 (function(){
-    
-    console.log(document);
     window.console.log(document);
     var console = window.console, document = window.document;
     
