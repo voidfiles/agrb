@@ -13,8 +13,8 @@
             this.getMetaDescription();
         }
     };
-    argrb.prototype.grLink = "http://www.google.com/reader/link-frame";
-    argrb.prototype.getHtml = function(){
+    agrb.prototype.grLink = "http://www.google.com/reader/link-frame";
+    agrb.prototype.getHtml = function(){
         if (document.selection && document.selection.createRange) {
             this.formdata.snippet = document.selection.createRange().text ? document.selection.createRange().htmlText: "";
             return true;
@@ -32,13 +32,13 @@
         return true;
     };
     
-    argrb.prototype.getMetaDescription = function(){
+    agrb.prototype.getMetaDescription = function(){
         for (var a = document.getElementsByTagName("meta"), b = 0, c; c = a[b]; b++) {
             var d = c.getAttribute("name");
             if (d && d.toUpperCase() == "DESCRIPTION") this.formdata.snippet = c.getAttribute("content");
         }
     };
-    argrb.prototype.cleanString = function(a, b){
+    agrb.prototype.cleanString = function(a, b){
         var ia = /&/g,
         ja = /</g,
         ka = />/g,
@@ -57,7 +57,7 @@
 
     };
     
-    argrb.prototype.createForm = function(){
+    agrb.prototype.createForm = function(){
         if(this.__form){ return true; }
         var form_data = [];
         for(var i in this.formdata){
@@ -79,7 +79,7 @@
         document.body.appendChild(this.__form);
         return true;
     };
-    argrb.prototype.createIframe = function(){
+    agrb.prototype.createIframe = function(){
         var a = document.getElementsById("GR________link_bookmarklet_node");
         if (!a) {
             a = document.createElement("div");
@@ -96,13 +96,13 @@
             document.body.appendChild(this.__iframe);
         };
     };
-    argrb.prototype.submitForm = function(){
+    agrb.prototype.submitForm = function(){
         this.__form.submit();
     };
     
     
     
-    argrb.prototype.submit = function(){
+    agrb.prototype.submit = function(){
         this.create_form();
         this.create_iframe();
         this.submit_form();
