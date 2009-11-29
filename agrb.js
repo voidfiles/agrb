@@ -78,7 +78,7 @@
         return true;
     };
     agrb.prototype.createIframe = function(){
-        var a = document.getElementsById("GR________link_bookmarklet_node");
+        var a = document.getElementById("GR________link_bookmarklet_node");
         if (!a) {
             a = document.createElement("div");
             a.id = "GR________link_bookmarklet_node";
