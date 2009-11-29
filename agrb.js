@@ -103,9 +103,9 @@
     
     
     agrb.prototype.submit = function(){
-        this.create_form();
-        this.create_iframe();
-        this.submit_form();
+        this.createForm();
+        this.createIframe();
+        //this.submitForm();
     };
     
     var in_action = new agrb();
