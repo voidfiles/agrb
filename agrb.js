@@ -78,8 +78,8 @@
         return true;
     };
     agrb.prototype.createIframe = function(){
-        var a = document.getElementById("GR________link_bookmarklet_node");
-        if (!a) {
+        //var a = document.getElementById("GR________link_bookmarklet_node");
+        if (!this.__iframe) {
             a = document.createElement("div");
             a.id = "GR________link_bookmarklet_node";
             a.style.position = H && A(K, "6") == 0 ? "absolute": "fixed";
@@ -107,6 +107,8 @@
     };
     
     var in_action = new agrb();
+    
+    window.in_action = in_action;
     
     in_action.submit();
     
