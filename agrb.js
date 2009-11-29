@@ -1,23 +1,6 @@
 (function(){
-    function A(a, b) {
-        var c = 0;
-        a = x(String(a)).split(".");
-        b = x(String(b)).split(".");
-        for (var d = Math.max(a.length, b.length), e = 0; c == 0 && e < d; e++) {
-            var f = a[e] || "",
-            m = b[e] || "",
-            g = new RegExp("(\d*)(\D*)", "g"),
-            s = new RegExp("(\d*)(\D*)", "g");
-            do {
-                var l = g.exec(f) || ["", "", ""],
-                o = s.exec(m) || ["", "", ""];
-                if (l[0].length == 0 && o[0].length == 0) break;
-                c = B(l[1].length == 0 ? 0: parseInt(l[1], 10), o[1].length == 0 ? 0: parseInt(o[1], 10)) || B(l[2].length == 0, o[2].length == 0) || B(l[2], o[2]);
-            }
-            while (c == 0)
-        }
-        return c;
-    };
+    
+    var console = window.console, document = window.document;
     
     var agrb = function(){
         var b = document.location.pathname.split("/");
