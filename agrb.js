@@ -160,9 +160,24 @@
             this.__iframe = document.getElementById("GR________link_bookmarklet_frame");
         };
     };
+    agrb.prototype.clear = function(){
+        var b = document.getElementById("GR________link_bookmarklet_node");
+        b.parentNode.removeChild(b);
+        delete this;
+    };
+    agrb.prototype.checkClose = function(){
+        var loc_array = window.location.href.split("#");
+        for(var b in loc_array){
+            if(loc_array[b] == "close-1"){
+                this.clear();
+            }
+        }
+        
+    };
     agrb.prototype.submitForm = function(data){
         console.log(data);
         this.__form.submit();
+        window.setInterval(this.checkClose, 50);
     };
     
     
