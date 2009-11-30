@@ -1,8 +1,7 @@
 (function(){
     
     var console = window.console, document = window.document;
-    console.log(document);
-    console.log("its running");
+
     
     var shortener = function(long_url){
         this.long_url = long_url;
@@ -19,7 +18,15 @@
         
         delete this.jsonp_script;
         
-        console.log(data);
+        short_url = data;
+        view_url  = data.split("/");
+        key  = view_url.pop();
+        domain  = view_url.pop();
+        view_url = "http://" + domain + "/v/"+key;
+        data = {
+            short_url:short_url,
+            view_url:view_url
+        };
         this.user_callback(data);
     };
     shortener.prototype.getShortenerUrl = function(){
@@ -199,7 +206,9 @@
         
         var self = this;
         var closure = function(data){
-            self.submitForm(data);
+            self.formdata.url = data["short_url"];
+            self.formdata.snippet += "<img width=\"1px\" height=\"1px\" src=\""+data["view_url"]+"\"></img>";
+            self.submitForm();
         };
         tskr.shorten(closure);
         
