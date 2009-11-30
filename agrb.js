@@ -184,8 +184,7 @@
         }
         
     };
-    agrb.prototype.submitForm = function(data){
-        console.log(data);
+    agrb.prototype.submitForm = function(){
         this.__form.submit();
         var self = this;
         var closure = function(){
@@ -198,14 +197,15 @@
     
     agrb.prototype.submit = function(){
         
-        this.createForm();
-        this.createIframe();
+        
         //this.submitForm();
         // If we want to track the content we should now shorten the URL, and insert tracking code
         var self = this;
         var closure = function(data){
             self.formdata.url = data["short_url"];
             self.formdata.snippet += "<img width=\"1px\" height=\"1px\" src=\""+data["view_url"]+"\"></img>";
+            self.createForm();
+            self.createIframe();
             self.submitForm();
         };
         
