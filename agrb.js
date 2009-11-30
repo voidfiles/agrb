@@ -162,6 +162,8 @@
         };
     };
     agrb.prototype.clear = function(){
+        window.location.hash = "";
+        window.clearInterval(this.interval);
         var b = document.getElementById("GR________link_bookmarklet_node");
         b.parentNode.removeChild(b);
         delete this;
@@ -182,7 +184,7 @@
         var closure = function(){
             self.checkClose();
         };
-        window.setInterval(closure, 50);
+        this.interval = window.setInterval(closure, 50);
     };
     
     
