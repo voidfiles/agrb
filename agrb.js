@@ -14,7 +14,8 @@
     
     shortener.prototype.shortner_callback = function(data){
         var json_script = this.jsonp_script;
-        this.json_script.parentNode.removeChild(json_script);
+        json_script.parentNode.removeChild(json_script);
+        
         delete this.jsonp_script;
         
         console.log(data);
