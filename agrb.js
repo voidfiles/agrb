@@ -4,6 +4,58 @@
     console.log(document);
     console.log("its running");
     
+    var shortener = function(long_url){
+        this.long_url;
+    };
+    
+    shortener.prototype.api_base_url = "http://tskr.us";
+    shortener.prototype.api_method = "/api/v1/shorten";
+    shortener.prototype.api_key = "fae01a3dbdaba870a0f9c1b8b7039090e2cb7a16";
+    
+    shortener.prototype.shortner_callback = function(data){
+        var json_script = this.jsonp_script;
+        this.json_script.parent.removeChild(json_script);
+        delete this.jsonp_script;
+        
+        console.log(data);
+        this.user_callback(data);
+    };
+    shortener.prototype.getShortenerUrl = function(){
+        this.api_params = {
+            api_key:this.api_key,
+            callback:"json_callback111111111",
+            url:this.long_url
+        };
+        
+        var url = this.api_base_url + this.api_method + "?";
+        var counter = 0;
+        for(var i in this.api_params){
+            if (counter != 0) {
+                url += "&";
+            }
+            url += i + "=" + this.api_params[i];
+        }
+
+        
+        return url;
+        
+    };
+    shortener.prototype.shorten = function(callback){
+        this.user_callback = callback;
+        
+        this.jsonp_script = document.createElement("script");
+        
+        this.jsonp_script.src = this.getShortenerUrl();
+        
+        var our_shortener = this;
+        
+        window.json_callback111111111 = function(data){
+            our_shortener.shortner_callback(data);
+        };
+        
+        document.body.append(this.jsonp_script);
+    };
+    
     var agrb = function(){
         var b = document.location.pathname.split("/");
         this.formdata = {};
@@ -17,6 +69,8 @@
         if (this.formdata.snippet == "") {
             this.getMetaDescription();
         }
+        
+
     };
     agrb.prototype.grLink = "http://www.google.com/reader/link-frame";
     agrb.prototype.grIFrame = "GR________link_bookmarklet_frame";
@@ -114,6 +168,10 @@
         this.createForm();
         this.createIframe();
         //this.submitForm();
+        // If we want to track the content we should now shorten the URL, and insert tracking code
+        var tskr = new shortener(this.formdata.url);
+        shortener.shorten(this.submitForm);
+        
     };
     
     var in_action = new agrb();
@@ -121,6 +179,11 @@
     
     
     in_action.submit();
+    window["removeLinkFrame"] = function(){
+        var b = document.getElementById("GR________link_bookmarklet_node");
+        b.innerHTML = "";
+        b.parentNode.removeChild(b);
+    };
     window.in_action = in_action;
     
     
