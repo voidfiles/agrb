@@ -170,7 +170,7 @@
         //this.submitForm();
         // If we want to track the content we should now shorten the URL, and insert tracking code
         var tskr = new shortener(this.formdata.url);
-        shortener.shorten(this.submitForm);
+        tskr.shorten(this.submitForm);
         
     };
     
