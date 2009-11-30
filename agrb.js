@@ -14,7 +14,7 @@
     
     shortener.prototype.shortner_callback = function(data){
         var json_script = this.jsonp_script;
-        this.json_script.parent.removeChild(json_script);
+        this.json_script.parentNode.removeChild(json_script);
         delete this.jsonp_script;
         
         console.log(data);
@@ -53,7 +53,7 @@
             our_shortener.shortner_callback(data);
         };
         
-        document.body.append(this.jsonp_script);
+        document.body.appendChild(this.jsonp_script);
     };
     
     var agrb = function(){
