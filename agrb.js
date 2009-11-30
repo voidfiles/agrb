@@ -168,7 +168,7 @@
     agrb.prototype.checkClose = function(){
         var loc_array = window.location.href.split("#");
         for(var b in loc_array){
-            if(loc_array[b] == "close-1"){
+            if(loc_array[b] == "close=1"){
                 this.clear();
             }
         }
