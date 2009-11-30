@@ -6,6 +6,7 @@
     
     var shortener = function(long_url){
         this.long_url = long_url;
+        this.long_url_escaped = escape(long_url);
     };
     
     shortener.prototype.api_base_url = "http://tskr.us";
@@ -25,7 +26,7 @@
         this.api_params = {
             api_key:this.api_key,
             callback:"json_callback111111111",
-            url:this.long_url
+            url:this.long_url_escaped
         };
         
         var url = this.api_base_url + this.api_method + "?";
