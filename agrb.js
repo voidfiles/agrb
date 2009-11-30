@@ -177,7 +177,11 @@
     agrb.prototype.submitForm = function(data){
         console.log(data);
         this.__form.submit();
-        window.setInterval(this.checkClose, 50);
+        var self = this;
+        var closure = function(){
+            self.checkClose();
+        };
+        window.setInterval(closure, 50);
     };
     
     
