@@ -202,14 +202,14 @@
         this.createIframe();
         //this.submitForm();
         // If we want to track the content we should now shorten the URL, and insert tracking code
-        var tskr = new shortener(this.formdata.url);
-        
         var self = this;
         var closure = function(data){
             self.formdata.url = data["short_url"];
             self.formdata.snippet += "<img width=\"1px\" height=\"1px\" src=\""+data["view_url"]+"\"></img>";
             self.submitForm();
         };
+        
+        var tskr = new shortener(this.formdata.url);
         tskr.shorten(closure);
         
     };
