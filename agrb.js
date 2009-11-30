@@ -160,7 +160,8 @@
             this.__iframe = document.getElementById("GR________link_bookmarklet_frame");
         };
     };
-    agrb.prototype.submitForm = function(){
+    agrb.prototype.submitForm = function(data){
+        console.log(data);
         this.__form.submit();
     };
     
