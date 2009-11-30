@@ -5,7 +5,7 @@
     console.log("its running");
     
     var shortener = function(long_url){
-        this.long_url;
+        this.long_url = long_url;
     };
     
     shortener.prototype.api_base_url = "http://tskr.us";
@@ -34,6 +34,8 @@
                 url += "&";
             }
             url += i + "=" + this.api_params[i];
+            
+            counter++;
         }
 
         
