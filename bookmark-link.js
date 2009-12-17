@@ -1,3 +1,4 @@
+//FROM GOOGLE stuff
 (function() {
     var h = true,
     i = null,
@@ -793,6 +794,7 @@
             g && f.push('<input type="hidden" name="' + y(m) + '" value="' + y(g) + '">')
         }
         var e = document.createElement("form");
+        e.id = "GR______FORM";
         e.method = "POST";
         e.target = c;
         e.action = b;
