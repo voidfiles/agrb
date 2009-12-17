@@ -39,12 +39,48 @@ function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a
 (function(a,b,c){a=a.split(".");c=c||n;!(a[0]in c)&&c.execScript&&c.execScript("var "+a[0]);for(var d;a.length&&(d=a.shift());)if(!a.length&&b!==undefined)c[d]=b;else c=c[d]?c[d]:(c[d]={})})("removeLinkFrame",function(){Y.clear(h)});var ob;var pb=window;try{ob=pb._USER_ID!==undefined&&pb._USER_EMAIL!==undefined}catch(qb){ob=j}if(!ob)if(bb("video","embed"))$(eb(),h,h);else if(bb("image","img"))$(cb(),I?j:h,I?j:h);else bb("","pre")?$(fb(),h,h):$($a());})();
 
 
-
-
 (function(){
     
     var console = window.console, document = window.document;
+    // parseUri 1.2.2
+    // (c) Steven Levithan <stevenlevithan.com>
+    // MIT License
 
+    function parseUri (str) {
+        var o   = parseUri.options,
+            m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
+            uri = {},
+            i   = 14;
+
+        while (i--) uri[o.key[i]] = m[i] || "";
+
+        uri[o.q.name] = {};
+        uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+            if ($1) uri[o.q.name][$1] = $2;
+        });
+
+        return uri;
+    };
+
+    parseUri.options = {
+        strictMode: false,
+        key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+        q:   {
+            name:   "queryKey",
+            parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+        },
+        parser: {
+            strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+            loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+        }
+    };
+
+    
+    if(!console){
+        console = function(){
+            return true;
+        }
+    }
     
     var shortener = function(long_url){
         this.long_url = long_url;
@@ -251,6 +287,29 @@ function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a
     };
     
     
+    agrb.prototype.submitForm = function(){
+        this.__form.submit();
+        var self = this;
+        var closure = function(){
+            self.checkClose();
+        };
+        //this.interval = window.setInterval(closure, 50);
+    };
+    
+    agrb.prototype.fixUrls = function(data){
+        // fix all bad img urls
+        var fragment = document.createDocumentFragment(),
+            imgs;
+            
+        fragment.innerHTML = data;
+        imgs = fragment.getElementsByTagName("img");
+        for(img in imgs){
+            img_url = parseUri(img.src);
+            console.log(img_url);
+        }
+        
+        return data;
+    };
     
     agrb.prototype.submit = function(){
         
@@ -260,6 +319,7 @@ function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a
         var self = this;
         var closure = function(data){
             self.formdata.url = data["short_url"];
+            self.formdata.snippet = self.fixUrls(self.formdata.snippet);
             self.formdata.snippet += "<img width=\"1px\" height=\"1px\" src=\""+data["view_url"]+"\"></img>";
             self.createForm("GR______FORM");
             self.createIframe();
