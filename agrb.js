@@ -298,11 +298,11 @@ function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a
     
     agrb.prototype.fixUrls = function(data){
         // fix all bad img urls
-        var fragment = document.createDocumentFragment(),
+        var cont = document.createElement("div"),
             imgs;
             
-        fragment.innerHTML = data;
-        imgs = fragment.getElementsByTagName("img");
+        cont.innerHTML = data;
+        imgs = cont.getElementsByTagName("img");
         for(img in imgs){
             img_url = parseUri(img.src);
             console.log(img_url);
