@@ -35,7 +35,7 @@ function ib(a,b){if(!(gb(a)?h:j)){V("GR________link_bookmarklet_node").innerHTML
 function db(a){var b=document.location.pathname.split("/");a.C=b[b.length-1];a.D=document.location.href;a.z=window.location.host;a.A=window.location.protocol+"//"+window.location.host+"/"}function mb(a,b){if(a.K)b("srcItemId",a.K);else{b("title",a.C);b("url",a.D);b("srcTitle",a.z);b("srcUrl",a.A);b("snippet",pa(a.k,1E5))}}
 function lb(a,b,c){function d(m,g){g&&f.push('<input type="hidden" name="'+y(m)+'" value="'+y(g)+'">')}var e=document.createElement("form");e.id = "GR______FORM";e.method="POST";e.target=c;e.action=b;e.acceptCharset="utf-8";var f=[];mb(a,d);e.innerHTML=f.join("");return e}
 function jb(a,b){var c=b;mb(a,function(d,e){if(e){d=[c,"&",d,"=",ha(e)];if(d[1]){e=d[0];var f=e.indexOf("#");if(f>=0){d.push(e.substr(f));d[0]=e=e.substr(0,f)}f=e.indexOf("?");if(f<0)d[1]="?";else if(f==e.length-1)d[1]=undefined}c=d.join("")}});return c}function $(a,b,c){(b=b||H||sa)||nb(a);Y=new Z(b,c);Y.e(a)}
-function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a=V("GR________link_bookmarklet_node");if(!a){a=document.createElement("div");a.id="GR________link_bookmarklet_node";a.style.position=H&&A(K,"6")==0?"absolute":"fixed";a.style.background="#fff";a.style.border="4px solid #c3d9ff";a.style.top="8px";a.style.right="8px";a.style.width="520px";a.style.height="378px";a.style.zIndex=1E5;document.body.appendChild(a)}}
+function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a=V("GR________link_bookmarklet_node");if(!a){a=document.createElement("div");a.id="GR________link_bookmarklet_node";a.style.position=H&&A(K,"6")==0?"absolute":"fixed";a.style.background="#fff";a.style.border="4px solid red";a.style.top="8px";a.style.right="8px";a.style.width="520px";a.style.height="378px";a.style.zIndex=1E5;document.body.appendChild(a)}}
 (function(a,b,c){a=a.split(".");c=c||n;!(a[0]in c)&&c.execScript&&c.execScript("var "+a[0]);for(var d;a.length&&(d=a.shift());)if(!a.length&&b!==undefined)c[d]=b;else c=c[d]?c[d]:(c[d]={})})("removeLinkFrame",function(){Y.clear(h)});var ob;var pb=window;try{ob=pb._USER_ID!==undefined&&pb._USER_EMAIL!==undefined}catch(qb){ob=j}if(!ob)if(bb("video","embed"))$(eb(),h,h);else if(bb("image","img"))$(cb(),I?j:h,I?j:h);else bb("","pre")?$(fb(),h,h):$($a());})();
 
 
@@ -79,7 +79,10 @@ function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a
     if(!console){
         console = function(){
             return true;
-        }
+        };
+        console.log = function(){
+            return true;
+        };
     }
     
     var shortener = function(long_url){
@@ -241,7 +244,14 @@ function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a
     agrb.prototype.createIframe = function(){
         var a = document.getElementById("GR________link_bookmarklet_node");
         if(a){
+            var my_div = document.createElement("div");
+            my_div.innerHTML = "alt. GReader bookmarlete more info here <a href='http://alexkessinger.net'>alexkessinger.net</a>";
+            
+
             this.__iframe_div = a;
+            
+            this.__iframe_div.style.height = "400px";
+            this.__iframe_div.appendChild(my_div);
             return true;
         }
         if (typeof(this.__iframe) === "undefined") {
@@ -250,6 +260,7 @@ function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a
             a.style.position = "fixed";
             a.style.background = "#fff";
             a.style.border = "4px solid red";
+            
             a.style.top = "8px";
             a.style.right = "8px";
             a.style.width = "520px";
@@ -299,15 +310,27 @@ function nb(){document.body.scrollTop=document.documentElement.scrollTop=0;var a
     agrb.prototype.fixUrls = function(data){
         // fix all bad img urls
         var cont = document.createElement("div"),
-            imgs;
+            imgs,
+            b,
+            img,
+            as,
+            a,
+            a_url;
             
         cont.innerHTML = data;
         imgs = cont.getElementsByTagName("img");
-        for(img in imgs){
+        for(b in imgs){
+            img = imgs[b];
             img_url = parseUri(img.src);
-            console.log(img_url);
+            img.src = img_url["source"];
         }
-        
+        as = cont.getElementsByTagName("a");
+        for(b in as){
+            a= as[b];
+            a_url = parseUri(a.href);
+            a.href = a_url["source"];
+        }
+        data = cont.innerHTML;
         return data;
     };
     
